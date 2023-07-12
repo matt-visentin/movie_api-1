@@ -1,11 +1,11 @@
 const express = require('express'),
-  morgan = require('morgan'),
-  fs = require('fs'),
-  path = require('path');
+  morgan = require('morgan');
+  // fs = require('fs'),
+  // path = require('path');
 
 const app = express();
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
+// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 
 let topMovies = [
   {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
@@ -20,7 +20,10 @@ let topMovies = [
   {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
 ];
 
-app.use(morgan('combined', {stream: accessLogStream}));
+// app.use(morgan('combined', {stream: accessLogStream}));
+app.use(morgan('common'));
+
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.send('Welcome Page');
@@ -29,8 +32,6 @@ app.get('/', (req, res) => {
 app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
-
-app.use('/documentation.html', express.static('public'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

@@ -5,19 +5,12 @@ const express = require('express'),
 
 const app = express();
 
-// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
-
-let topMovies = [
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
-  {Title: 'Title', Director: 'Director\'s name', Year: 'Year'},
+let movies = [
+  {Title: 'Eternal Sunshine Of A Spottles Mind', Description: 'Description', Genre: 'Genre', Director: [{Name: 'Director\'s name', Bio: 'Bio', Born: 'Date of Birth', Dead: 'Date of death'}], Year: 'Year', Image: 'Image URL'},
+  {Title: 'A Marrige Story', Description: 'Description', Genre: 'Genre', Director: [{Name: 'Director\'s name', Bio: 'Bio', Born: 'Date of Birth', Dead: 'Date of death'}], Year: 'Year', Image: 'Image URL'},
+  {Title: '', Description: 'Description', Genre: 'Genre', Director: [{Name: 'Director\'s name', Bio: 'Bio', Born: 'Date of Birth', Dead: 'Date of death'}], Year: 'Year', Image: 'Image URL'},
+  {Title: 'Title', Description: 'Description', Genre: 'Genre', Director: [{Name: 'Director\'s name', Bio: 'Bio', Born: 'Date of Birth', Dead: 'Date of death'}], Year: 'Year', Image: 'Image URL'},
+  {Title: 'Title', Description: 'Description', Genre: 'Genre', Director: [{Name: 'Director\'s name', Bio: 'Bio', Born: 'Date of Birth', Dead: 'Date of death'}], Year: 'Year', Image: 'Image URL'}
 ];
 
 // app.use(morgan('combined', {stream: accessLogStream}));
@@ -30,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-  res.json(topMovies);
+  res.json(movies);
 });
 
 app.use((err, req, res, next) => {

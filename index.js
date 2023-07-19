@@ -108,11 +108,11 @@ app.post('/users', (req, res) => {
 });
 
 // UPDATE user's detail
-app.put('/users/:id', (req, res) => {
-  const { id } = req.params;
+app.put('/users/:userId', (req, res) => {
+  const { userId } = req.params;
   const updateUser = req.body;
 
-  let user = users.find( user => user.Id == id);
+  let user = users.find( user => user.Id == userId);
 
   if (user) {
     user.Name = updateUser.Name;
@@ -124,10 +124,10 @@ app.put('/users/:id', (req, res) => {
 });
 
 // CREATE Add movie to list of favorites
-app.post('/users/:id/:movieTitle', (req, res) => {
-  const { id, movieTitle } = req.params;
+app.patch('/users/:userId/favorites/:movieTitle', (req, res) => {
+  const { userId, movieTitle } = req.params;
 
-  let user = users.find( user => user.Id == id);
+  let user = users.find( user => user.Id == userId);
 
   if (user) {
     user.Favorites.push(movieTitle);
@@ -138,14 +138,14 @@ app.post('/users/:id/:movieTitle', (req, res) => {
 });
 
 // DELETE Remove movie form list of favorites
-app.delete('/users/:id/:movieTitle', (req, res) => {
-  const { id, movieTitle } = req.params;
+app.delete('/users/:userId/favorites/:movieTitle', (req, res) => {
+  const { userId, movieTitle } = req.params;
 
-  let user = users.find( user => user.Id == id);
+  let user = users.find( user => user.Id == userId);
 
   if (user) {
-    user.Favorites = user.Favorites.filter( Title => Title !== movieTitle)
-    res.status(200).send(movieTitle + ' has been succesfully deleted from your favorites!');
+    user.Favorites = user.Favorites.filter( Title => Title !== movieTitle);
+    res.status(200).send(movieTitle + ' has been succesfully removed from your favorites!');
   } else {
     res.status(400).send(movieTitle + ' has not been removed from your favorite do to an unexpected error.');
   }

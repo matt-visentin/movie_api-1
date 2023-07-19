@@ -81,18 +81,18 @@
 
         <tr>
           <td>Allows users to add a movie to their favorites</td>
-          <td>/users/:id/:movieTitle</td>
+          <td>/users/:userId/favorites/:movieTitle</td>
           <td>POST</td>
-          <td>:id, :movieTitle</td>
+          <td>:userId, :movieTitle</td>
           <td>None</td>
           <td>A JSON of the user</td>
         </tr>
 
         <tr>
           <td>Allows users to remove a movie from their favorites</td>
-          <td>/users/:id/:movieTitle</td>
+          <td>/users/:userId/favorites/:movieTitle</td>
           <td>DELETE</td>
-          <td>:id, :movieTitle</td>
+          <td>:userId, :movieTitle</td>
           <td>None</td>
           <td>Text confirming the movie has been removed from the user's list</td>
         </tr>

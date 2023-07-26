@@ -101,8 +101,8 @@ app.get('/movies/:MovieTitle', async (req, res) => {
 });*/
 
 // READ Get genre of a movie by its name
-app.get('/movies/genre/:GenreName', async (req, res) => {
-  await Movies.findOne({ "Genre.Name" : req.params.GenreName})
+app.get('/movies/genre/:genreName', async (req, res) => {
+  await Movies.findOne({ "Genre.Name" : req.params.genreName})
     .then((movie) => {
     res.json(movie.Genre);
     })

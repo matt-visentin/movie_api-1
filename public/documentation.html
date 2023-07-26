@@ -45,9 +45,9 @@
 
         <tr>
           <td>Returns data about single movie by title</td>
-          <td>/movies/:title</td>
+          <td>/movies/:MovieTitle</td>
           <td>GET</td>
-          <td>:title</td>
+          <td>:MovieTitle</td>
           <td>None</td>
           <td>A JSON object a specific movie</td>
         </tr>
@@ -72,36 +72,36 @@
 
         <tr>
           <td>Allows users to change their information</td>
-          <td>/users/:id</td>
+          <td>/users/:Username</td>
           <td>PUT</td>
-          <td>:id</td>
-          <td>A JSON object of the new user, structured like: {"_id":{"$oid":"64bd4535083944ebfdaf3e23"},"Username":"User1","Password":"PasswordUser1","Email":"user1@example.com","Birthday":{"$date":"1988-01-01T00:00:00Z"},"Favorites":[{"$oid":"64bd5504083944ebfdaf3e2d"}]}</td>
-          <td>A JSON object of the new user, structured like: {"_id":{"$oid":"64bd4535083944ebfdaf3e23"},"Username":"User1","Password":"PasswordUser1","Email":"user1@example.com","Birthday":{"$date":"1988-01-01T00:00:00Z"},"Favorites":[{"$oid":"64bd5504083944ebfdaf3e2d"}]}</td>
+          <td>:Username</td>
+          <td>A JSON object of the new user, structured like: {"_id":{"$oid":"64bd4535083944ebfdaf3e23"},"Username":"User1","Password":"PasswordUser1","Email":"user1@example.com","Birthday":{"$date":"1988-01-01"},"Favorites":[{"$oid":"64bd5504083944ebfdaf3e2d"}]}</td>
+          <td>A JSON object of the new user, structured like: {"_id":{"$oid":"64bd4535083944ebfdaf3e23"},"Username":"User1","Password":"PasswordUser1","Email":"user1@example.com","Birthday":{"$date":"1988-01-01"},"Favorites":[{"$oid":"64bd5504083944ebfdaf3e2d"}]}</td>
         </tr>
 
         <tr>
           <td>Allows users to add a movie to their favorites</td>
-          <td>/users/:userId/favorites/:movieTitle</td>
+          <td>/users/:Username/favorites/:movieTitle</td>
           <td>POST</td>
-          <td>:userId, :movieTitle</td>
+          <td>:Username, :movieTitle</td>
           <td>None</td>
           <td>A JSON of the user</td>
         </tr>
 
         <tr>
           <td>Allows users to remove a movie from their favorites</td>
-          <td>/users/:userId/favorites/:movieTitle</td>
+          <td>/users/:Username/favorites/:movieTitle</td>
           <td>DELETE</td>
-          <td>:userId, :movieTitle</td>
+          <td>:Username, :movieTitle</td>
           <td>None</td>
           <td>Text confirming the movie has been removed from the user's list</td>
         </tr>
 
         <tr>
           <td>Allows a user to be deleted</td>
-          <td>/users/:id</td>
+          <td>/users/:Username</td>
           <td>DELETE</td>
-          <td>:id</td>
+          <td>:Username</td>
           <td>None</td>
           <td>Text confirming the user has been deleted</td>
         </tr>

@@ -8,10 +8,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let auth = require('./auth')(app);
+let auth = require('./auth.js')(app);
 
 const passport = require('passport');
-require('./passport');
+require('./passport.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -98,7 +98,7 @@ app.post('/users', async (req, res) => {
 });
 
 // READ Get all users
-app.get('/users', async (req,res) => {
+app.get('/users', passport.authenticate('jwt', { session: false }), async (req,res) => {
   await Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -110,7 +110,7 @@ app.get('/users', async (req,res) => {
 });
 
 //READ Get user by username
-app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.get('/users/:Username', async (req, res) => {
   await Users.findOne({ Username: req.params.Username})
     .then((user) => {
       res.json(user);
@@ -123,7 +123,10 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), as
 
 // UPDATE Update a user's info, by username
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  await Users.findOneAndUpdate({ Username: req.params.Username },
+    if (req.user.Username !== req.params.Username){
+      return res.status(400).send('Permission denied');
+    }
+    await Users.findOneAndUpdate({ Username: req.params.Username },
     { $set:
     {
       Username: req.body.Username,

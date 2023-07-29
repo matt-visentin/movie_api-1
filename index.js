@@ -98,10 +98,11 @@ app.post('/users', async (req, res) => {
 });
 
 // READ Get all users
-app.get('/users', passport.authenticate('jwt', { session: false }), async (req,res) => {
+app.get('/users',  passport.authenticate('jwt', { session: false }), async (req,res) => {
+
   await Users.find()
-    .then((users) => {
-      res.status(201).json(users);
+    .then((user) => {
+      res.status(201).json(user);
     })
     .catch((err) => {
       console.log(err);
@@ -110,7 +111,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), async (req,r
 });
 
 //READ Get user by username
-app.get('/users/:Username', async (req, res) => {
+app.get('/users/:Username',  passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOne({ Username: req.params.Username})
     .then((user) => {
       res.json(user);
@@ -123,8 +124,8 @@ app.get('/users/:Username', async (req, res) => {
 
 // UPDATE Update a user's info, by username
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    if (req.user.Username !== req.params.Username){
-      return res.status(400).send('Permission denied');
+    if(req.user.Username !== req.params.Username){
+      return res.status(400).send('Permision denied.')
     }
     await Users.findOneAndUpdate({ Username: req.params.Username },
     { $set:
@@ -146,6 +147,9 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
 
 // POST Add movie to list of favorites
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  if(req.user.Username !== req.params.Username){
+    return res.status(400).send('Permision denied.')
+  }
   await Users.findOneAndUpdate({ Username: req.params.Username }, {
      $push: { Favorites: req.params.MovieID }
    },
@@ -161,6 +165,9 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 
 // DELETE Remove movie form list of favorites
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  if(req.user.Username !== req.params.Username){
+    return res.status(400).send('Permision denied.')
+  }
   await Users.findOneAndUpdate({ Username: req.params.Username }, {
      $pull: { Favorites: req.params.MovieID }
    },
@@ -176,6 +183,9 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
 
 // DELETE user
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  if(req.user.Username !== req.params.Username){
+    return res.status(400).send('Permision denied.')
+  }
   await Users.findOneAndRemove({ Username: req.params.Username })
   .then((user) => {
     if (!user) {

@@ -1,0 +1,1 @@
+{"_id":{"$oid":"64c7973684ecd790e07c8f24"},"Username":"admin","Password":"$2b$10$NAdacITjXvXOLxk33vMxfeDpmxQokayKGV6ntOjX.c8GDNF1EITSC","Email":"admin@email.com","Birthday":{"$date":"1988-06-28T00:00:00Z"},"Favorites":[],"__v":0}

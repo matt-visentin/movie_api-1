@@ -20,13 +20,13 @@ passport.use(
         if (!user) {
           console.log('incorrect username');
           return callback(null, false, {
-            message: 'Incorrect username or password.',
+            message: 'User not found.',
           });
         }
-        // if (!user.validatePassword(password)) {
-        //   console.log('incorrect password');
-        //   return callback(null, false, { message: 'Incorrect password.' });
-        // }
+        if (!user.validatePassword(password)) {
+          console.log('incorrect password');
+          return callback(null, false, { message: 'The password you are trying to enter is incorretct.' });
+        }
         console.log('finished');
         return callback(null, user);
       })
